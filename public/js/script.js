@@ -35,15 +35,16 @@ document
           return;
         }
 
-        // Monta a string para exibir a lista de produtos e preços
-        let saida = `Cesta básica em ${data.cidade}:\n`;
+        // Monta uma string HTML para exibir a lista de produtos e preços com formatação
+        let saida = `<h3>Cesta básica em ${data.cidade}:</h3>`;
 
+        // Para cada produto, adiciona uma linha formatada com parágrafo
         data.produtos.forEach((item) => {
-          saida += `- ${item.produto}: ${item.preco} Gs\n`;
+          saida += `<p>- <strong>${item.produto}:</strong> ${item.preco} Gs</p>`;
         });
 
-        // Atualiza a div "resultado" com o texto formatado
-        document.getElementById("resultado").innerText = saida;
+        // Atualiza a div "resultado" com o HTML formatado
+        document.getElementById("resultado").innerHTML = saida;
       })
       .catch((error) => {
         console.error("Erro na requisição:", error);

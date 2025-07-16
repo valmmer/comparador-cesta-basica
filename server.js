@@ -1,13 +1,13 @@
-// importa a biblioteca Express para dentro do seu arquivo.
+// importa a biblioteca Express
 const express = require("express");
 
-// instância do Express, que chamamos de app
+// cria uma instância do Express
 const app = express();
 
-// servidor vai rodar na porta 3000.
+// define a porta em que o servidor vai rodar
 const PORT = 3000;
 
-// inicia o servidor escutando na porta definida.
+// inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
@@ -15,10 +15,10 @@ app.listen(PORT, () => {
 // serve os arquivos estáticos da pasta "public"
 app.use(express.static("public"));
 
-// permite que o Express entenda JSON no corpo das requisições
+// permite que o servidor entenda JSON nas requisições
 app.use(express.json());
 
-// dados simulados de preços da cesta básica por cidade
+// dados simulados com preços por cidade
 const precosCesta = {
   assuncao: [
     { produto: "Arroz", preco: 8000 },
@@ -40,7 +40,7 @@ const precosCesta = {
   ],
 };
 
-// Rota POST para receber a cidade do frontend
+// rota para receber a cidade e responder com os preços formatados
 app.post("/buscar-precos", (req, res) => {
   const { cidade } = req.body;
 
@@ -48,11 +48,23 @@ app.post("/buscar-precos", (req, res) => {
 
   const produtos = precosCesta[cidade];
 
-  // Verifica se a cidade existe no objeto de preços
+  // valida se a cidade existe
   if (!produtos) {
-    return res.status(404).json({ erro: "Cidade não encontrada" });
+    return res.status(404).json({ erro: "Cidade não encontrada." });
   }
 
-  // Responde com os produtos e cidade
-  res.json({ cidade, produtos });
+  // monta HTML com os dados da cesta básica
+  let html = `<h2>Cesta básica em <span style="text-transform: capitalize;">${cidade}</span>:</h2>`;
+
+  produtos.forEach((item, index) => {
+    html += `<p><strong>${
+      item.produto
+    }:</strong> ${item.preco.toLocaleString()} Gs</p>`;
+    if (index < produtos.length - 1) {
+      html += `<hr>`;
+    }
+  });
+
+  // responde com o HTML como mensagem
+  res.json({ mensagem: html });
 });

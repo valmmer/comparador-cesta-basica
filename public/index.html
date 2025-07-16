@@ -4,22 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comparador de Cesta Básica</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <meta
+      name="keywords"
+      content="cesta básica, comparação de preços, Paraguai"
+    />
+    <meta name="author" content="Valmer Mariano" />
   </head>
   <body>
-    <h1>Comparador de Cesta Básica</h1>
+    <main class="container">
+      <img
+        src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=80"
+        alt="Cesta básica com alimentos"
+        class="imagem-responsiva"
+      />
 
-    <form id="formulario-cidade">
-      <label for="cidade">Escolha sua cidade:</label>
-      <select id="cidade" name="cidade">
-        <option value="">--Selecione--</option>
-        <option value="assuncao">Assunção</option>
-        <option value="ciudad-del-este">Ciudad del Este</option>
-        <option value="encarnacion">Encarnación</option>
-      </select>
-      <button type="submit">Buscar Preços</button>
-    </form>
+      <h1>Comparador de Cesta Básica</h1>
 
-    <div id="resultado"></div>
+      <div class="form-container">
+        <form id="formulario-cidade">
+          <label for="cidade">Escolha sua cidade:</label>
+          <select id="cidade" name="cidade" required>
+            <option value="">--Selecione--</option>
+            <option value="assuncao">Assunção</option>
+            <option value="ciudad-del-este">Ciudad del Este</option>
+            <option value="encarnacion">Encarnación</option>
+          </select>
+          <button type="submit">Buscar Preços</button>
+        </form>
+
+        <div id="resultado" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
   </body>
-  <script src="js/script.js"></script>
 </html>
+s
